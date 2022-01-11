@@ -2,7 +2,7 @@ name: ci
 
 on:
   push:
-    branches: [master]
+    branches: [master, build-multi-arch]
     paths-ignore:
       - "**.md"
       - "**/.gitignore"
@@ -57,7 +57,7 @@ jobs:
 
       - name: Create tag
         id: create-tag
-        run: | 
+        run: |
           git sv tag
           VERSION=$(git sv cv)
           echo "::set-output name=tag::v$VERSION"
@@ -88,10 +88,10 @@ jobs:
       - name: Create release notes
         run: |
           git sv rn -t "${{ needs.tag.outputs.tag }}" > release-notes.md
-      
+
       - name: Build releases
         run: make release-all
-      
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
