@@ -1,3 +1,4 @@
+# fff
 .PHONY: usage build lint lint-autofix test test-coverage test-show-coverage run tidy release release-all
 
 OK_COLOR=\033[32;01m
